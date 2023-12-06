@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: RTU Attendance API
+  version: 1.0.0
+paths:
+  /api/employee/presence:
+    post:
+      summary: Update Employee Presence
+      description: Endpoint to inform the server about the presence of an employee.
+      operationId: updateEmployeePresence
+      requestBody:
+        $ref: '#/components/requestBodies/EmployeePresenceRequestBody'
+      responses:
+        '200':
+          description: Successful update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeDetailsResponse'
+        '401':
+          description: Unauthorized. Invalid API key.
+security:
+  - apiKey: []
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  requestBodies:
+    EmployeePresenceRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmployeePresenceRequest'
+  schemas:
+    EmployeePresenceRequest:
+      type: object
+      properties:
+        employeeId:
+          type: string
+          description: The unique identifier of the employee.
+        status:
+          $ref: '#/components/schemas/EmployeeStatusEnum'
+      required:
+        - employeeId
+    EmployeeDetailsResponse:
+      type: object
+      properties:
+        employeeId:
+          type: string
+          description: The unique identifier of the employee.
+        picture:
+          type: string
+          description: URL or base64-encoded image of the employee.
+        status:
+          $ref: '#/components/schemas/EmployeeStatusEnum'
+        lastStatusChange:
+          type: string
+          format: date-time
+          description: The timestamp of the last status change.
+    EmployeeStatusEnum:
+      type: string
+      enum: ['available', 'unavailable', 'idle']
+      description: The availability status of the employee.

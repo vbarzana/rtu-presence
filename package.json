@@ -1,0 +1,29 @@
+{
+  "name": "rtu-presence",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate": "npx codegen generate -l typescript-server -i ./specs/rtu-presence-oas.yml -o src/generated/"
+  },
+  "dependencies": {
+    "@types/node": "20.10.3",
+    "@types/react": "18.2.42",
+    "@types/react-dom": "18.2.17",
+    "autoprefixer": "10.4.16",
+    "eslint": "8.55.0",
+    "eslint-config-next": "14.0.3",
+    "next": "14.0.3",
+    "postcss": "8.4.32",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.6",
+    "typescript": "5.3.2"
+  },
+  "devDependencies": {
+    "swagger-codegen": "git+https://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:x-oauth-basic@github.com/vbarzana/swagger-tools.git"
+  }
+}
